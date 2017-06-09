@@ -15,6 +15,13 @@ restify.defaultResponseHeaders = function (data) {
     this.header('Access-Control-Allow-Origin', '*')
 }
 
+// server.use(function (req, res, next) {
+//     if (req.headers['x-forwarded-proto'] === 'http') {
+//         next();
+//     } else {
+//         res.redirect('http://' + req.hostname + req.url, next);
+//     }
+// })
 
 server.use(lib.authChecker)
 
@@ -61,7 +68,7 @@ swagger.configureSwaggerPaths("", "/api-docs", "") //we remove the {format} part
 swagger.configure('http://' + config.server.host + ':' + config.server.port, '0.1')
 //start the server
 server.listen(config.server.port, function () {
-    console.log("Server started succesfully…".green)
+    console.log(("Server started succesfully on port "+ config.server.port +"…").green)
     lib.db.connect(function (err) {
         if (err) 
             console.log("Error trying to connect to database: ".red, err.red)
