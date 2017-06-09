@@ -2,7 +2,7 @@ var restify = require("restify"),
     colors = require("colors"),
     lib = require("./lib"),
     swagger = require("swagger-node-restify"),
-    passport	= require('passport'),
+    passport = require('passport'),
     config = lib.config;
 
 var server = restify.createServer(lib.config.server)
@@ -11,11 +11,19 @@ server.use(restify.fullResponse())
     .use(restify.queryParser())
     .use(restify.bodyParser())
 
-restify.defaultResponseHeaders = function (data) {
-    this.header('Access-Control-Allow-Origin', '*')
-    this.header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
-    this.header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
-}
+// restify.defaultResponseHeaders = function (data) {
+//     this.header('Access-Control-Allow-Origin', '*')
+//     this.header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
+//     this.header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
+// }
+
+server.use(
+    function crossOrigin(req, res, next) {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "X-Requested-With");
+        return next();
+    }
+);
 
 // server.use(function (req, res, next) {
 //     if (req.headers['x-forwarded-proto'] === 'http') {
@@ -70,9 +78,9 @@ swagger.configureSwaggerPaths("", "/api-docs", "") //we remove the {format} part
 swagger.configure('http://' + config.server.host + ':' + config.server.port, '0.1')
 //start the server
 server.listen(config.server.port, function () {
-    console.log(("Server started succesfully on port "+ config.server.port +"…").green)
+    console.log(("Server started succesfully on port " + config.server.port + "…").green)
     lib.db.connect(function (err) {
-        if (err) 
+        if (err)
             console.log("Error trying to connect to database: ".red, err.red)
         else console.log("Database service successfully started".green)
     })
