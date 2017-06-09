@@ -18,7 +18,6 @@ restify.defaultResponseHeaders = function (data) {
 
 server.use(lib.authChecker)
 
-// pass passport for configuration
 passport.use(lib.passport)
 
 ///Middleware to check for valid api key sent
