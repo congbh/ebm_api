@@ -57,7 +57,8 @@ swagger.addModels(lib.schemas)
 swagger.setAppHandler(server)
 lib.helpers.setupRoutes(server, swagger, lib)
 swagger.configureSwaggerPaths("", "/api-docs", "") //we remove the {format} part of the paths, to
-swagger.configure('http://localhost:9000', '0.1')
+// swagger.configure('http://localhost:9000', '0.1')
+swagger.configure('http://' + config.server.host + ':' + config.server.port, '0.1')
 //start the server
 server.listen(config.server.port, function () {
     console.log("Server started succesfully…".green)
