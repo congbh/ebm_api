@@ -20,7 +20,7 @@ server.use(restify.fullResponse())
 function unknownMethodHandler(req, res) {
     if (req.method.toLowerCase() === 'options') {
         console.log('received an options method request');
-        var allowHeaders = ['Accept', 'Accept-Version', 'Content-Type', 'Api-Version', 'Origin', 'X-Requested-With']; // added Origin & X-Requested-With
+        var allowHeaders = ['Accept', 'Accept-Version', 'Content-Type', 'Api-Version', 'Origin', 'X-Requested-With', 'hmacdata']; // added Origin & X-Requested-With
 
         if (res.methods.indexOf('OPTIONS') === -1) res.methods.push('OPTIONS');
 
