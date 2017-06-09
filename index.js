@@ -13,9 +13,6 @@ server.use(restify.fullResponse())
 
 restify.defaultResponseHeaders = function (data) {
     this.header('Access-Control-Allow-Origin', '*')
-    // this.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS')
-    // this.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Credentials")
-    // this.header("Access-Control-Allow-Credentials", "true")
 }
 
 
