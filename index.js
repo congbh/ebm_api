@@ -13,6 +13,8 @@ server.use(restify.fullResponse())
 
 restify.defaultResponseHeaders = function (data) {
     this.header('Access-Control-Allow-Origin', '*')
+    this.header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
+    this.header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
 }
 
 // server.use(function (req, res, next) {
